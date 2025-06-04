@@ -1,8 +1,12 @@
-# Ensure the PSSQLite module is installed and import it
+# Ensure the modules are installed and import it
 if (-not (Get-Module -ListAvailable -Name PSSQLite)) {
     Install-Module -Name PSSQLite -Scope CurrentUser -Force
 }
+if (-not (Get-Module -ListAvailable -Name PSMQTT)) {
+    Install-Module -Name PSMQTT -Scope CurrentUser -Force
+}
 Import-Module PSSQLite
+#Import-Module PSMQTT
 
 # Function to handle incoming MQTT messages
 function OnMessageReceived {
@@ -102,7 +106,6 @@ function Start-TopicJob {
                 OnMessageReceived -topic $receivedTopic -message $receivedMessage -dbPath $dbPath
             }
         }
-
         Import-Module PSMQTT
         Import-Module PSSQLite
         try {
@@ -128,8 +131,8 @@ function Cleanup-Jobs {
 }
 
 # Main script
-$mqttBroker = "127.0.0.1"
-$topics = @("ip_alive", "file_exists")
+$mqttBroker = "192.168.203.127"
+$topics = @("Switch1", "Flow1", "Switch2", "Capacity1")
 $dbDirectory = [System.Environment]::GetEnvironmentVariable('SQLITEPATH')
 if (-not $dbDirectory) {
     $dbDirectory = "C:\Windows\Temp\mqtt"
