@@ -3,13 +3,13 @@
 
 ## Usage
 ### Collecting tags
-- enter the MQTT topics that you need to record in jobs.txt
+- enter the MQTT topics that you need to record in topics.txt
 - ensure that the variable $mqttBroker is set in the script body of PS_mqtt_to_sqlite.ps1.
 - run the script "PS_mqtt_to_sqlite.ps1". 
-    - This script will place the database in the path specified by the "SQLITEPATH" environment variable. 
+    - This script will place the database in the path specified by the "SQLITEPATH" environment variable. The file will be named "db.sqlite3".
     - In order to set this to your current directory, run it like this:
     
-    ```$env:SQLITEPATH = "<INSERT PATH TO DB FILE>"; .\PS_mqtt_to_sqlite.ps1```
+    ```$env:SQLITEPATH = "./"; .\PS_mqtt_to_sqlite.ps1```
 - The script will record all mqtt messages that are declared in Jobs.txt, provided that the topic is in the format "decoded/\<machine\>/\<topic\>", and that the messages are JSON data which contain a "timestamp" attribute paired with at least one other non-metrics attribute.
 ### Querying tags
 - TODO embed image of db schema
