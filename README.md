@@ -19,14 +19,14 @@
 --You can do similar queries with any given set of attributes, for any Tag, belonging to any Machine.
 
 SELECT 
-    Msg.ID AS "Msg_ID",
-    Msg.timestamp As "Msg_time",
-    MAX(CASE WHEN Attrib.key = 'seq' THEN Attrib.val END) AS "seq" -- repeat this for each desired attribute within the message
+    Msg.ID AS 'Msg_ID',
+    Msg.timestamp As 'Msg_time',
+    MAX(CASE WHEN Attrib.key = 'seq' THEN Attrib.val END) AS 'seq' -- repeat this for each desired attribute within the message
 FROM Msg 
 LEFT JOIN Attrib ON Attrib.Msg_ID = Msg.ID 
 LEFT JOIN Machine_Tag_Msg on Machine_tag_Msg.Msg_ID = Msg.ID 
-Where Machine_tag_msg.Machine_name = "debarker" 
-and Machine_tag_msg.Tag_name = "log_count"
+Where Machine_tag_msg.Machine_name = 'debarker' 
+and Machine_tag_msg.Tag_name = 'log_count'
 GROUP BY Msg.ID;
 ```
 
